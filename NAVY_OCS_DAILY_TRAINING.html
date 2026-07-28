@@ -1,0 +1,2211 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#061b33">
+  <title>Navy OCS Daily Training Plan</title>
+
+  <style>
+    :root {
+      --navy: #061b33;
+      --navy-2: #0a2c52;
+      --blue: #1677c8;
+      --blue-light: #eaf5ff;
+      --green: #197a43;
+      --green-light: #eaf7ef;
+      --yellow: #c88900;
+      --yellow-light: #fff7df;
+      --red: #b42318;
+      --red-light: #fff0ef;
+      --ink: #14213d;
+      --muted: #5d6a7a;
+      --border: #d8e0e8;
+      --surface: #ffffff;
+      --page: #f3f6f9;
+      --shadow: 0 4px 18px rgba(8, 37, 63, 0.10);
+      --radius: 14px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--page);
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.45;
+    }
+
+    header {
+      color: white;
+      background: linear-gradient(135deg, var(--navy), var(--navy-2));
+      padding: 22px 16px 20px;
+      box-shadow: var(--shadow);
+    }
+
+    header .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(1.45rem, 4vw, 2.15rem);
+      line-height: 1.15;
+    }
+
+    .subtitle {
+      margin: 8px 0 0;
+      color: #d9ecff;
+      font-size: 0.98rem;
+    }
+
+    .top-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    button {
+      appearance: none;
+      border: 0;
+      border-radius: 9px;
+      cursor: pointer;
+      font: inherit;
+      font-weight: 700;
+      min-height: 42px;
+      padding: 10px 14px;
+      transition: transform 0.12s ease, opacity 0.12s ease, background 0.12s ease;
+    }
+
+    button:active {
+      transform: scale(0.98);
+    }
+
+    .header-button {
+      color: var(--navy);
+      background: white;
+    }
+
+    .header-button.secondary {
+      color: white;
+      background: rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+    }
+
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 18px 14px 42px;
+    }
+
+    .notice {
+      background: var(--yellow-light);
+      border-left: 5px solid var(--yellow);
+      border-radius: 8px;
+      color: #624800;
+      padding: 12px 14px;
+      margin-bottom: 18px;
+      font-size: 0.94rem;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(280px, 400px) minmax(0, 1fr);
+      align-items: start;
+      gap: 18px;
+    }
+
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .calendar-panel {
+      position: sticky;
+      top: 14px;
+      overflow: hidden;
+    }
+
+    .panel-header {
+      background: var(--navy);
+      color: white;
+      padding: 14px;
+    }
+
+    .panel-header h2 {
+      margin: 0;
+      font-size: 1.05rem;
+    }
+
+    .calendar-controls {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      align-items: center;
+      padding: 12px 12px 0;
+    }
+
+    .calendar-controls button {
+      min-height: 36px;
+      padding: 7px 10px;
+      color: var(--navy);
+      background: var(--blue-light);
+      font-size: 0.88rem;
+    }
+
+    #monthLabel {
+      font-weight: 800;
+      text-align: center;
+      font-size: 0.98rem;
+    }
+
+    .calendar {
+      padding: 12px;
+    }
+
+    .weekday-row,
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 4px;
+    }
+
+    .weekday-row {
+      margin-bottom: 5px;
+    }
+
+    .weekday {
+      color: var(--muted);
+      font-size: 0.7rem;
+      font-weight: 800;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .day-button,
+    .empty-day {
+      min-height: 43px;
+      border-radius: 8px;
+    }
+
+    .empty-day {
+      background: transparent;
+    }
+
+    .day-button {
+      position: relative;
+      padding: 4px;
+      color: var(--ink);
+      background: #f7f9fb;
+      border: 1px solid #e5ebf0;
+      font-size: 0.87rem;
+      font-weight: 700;
+    }
+
+    .day-button.has-workout {
+      background: var(--blue-light);
+      border-color: #9ac9ef;
+    }
+
+    .day-button.rest-day {
+      background: #f8f8f8;
+      border-color: #e5e5e5;
+    }
+
+    .day-button.selected {
+      color: white;
+      background: var(--blue);
+      border-color: var(--blue);
+      box-shadow: 0 0 0 2px rgba(22, 119, 200, 0.22);
+    }
+
+    .day-button.completed::after {
+      content: "✓";
+      position: absolute;
+      top: 1px;
+      right: 4px;
+      color: var(--green);
+      font-size: 0.75rem;
+      font-weight: 900;
+    }
+
+    .day-button.selected.completed::after {
+      color: white;
+    }
+
+    .calendar-legend {
+      padding: 0 12px 14px;
+      color: var(--muted);
+      font-size: 0.79rem;
+    }
+
+    .legend-dot {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin: 0 4px 0 8px;
+      vertical-align: middle;
+    }
+
+    .legend-dot:first-child {
+      margin-left: 0;
+    }
+
+    .workout-panel {
+      overflow: hidden;
+    }
+
+    .workout-heading {
+      color: white;
+      background: linear-gradient(135deg, var(--navy), var(--navy-2));
+      padding: 18px;
+    }
+
+    .workout-heading h2 {
+      margin: 0;
+      font-size: clamp(1.25rem, 3vw, 1.65rem);
+      line-height: 1.2;
+    }
+
+    .workout-heading p {
+      margin: 6px 0 0;
+      color: #d9ecff;
+      font-size: 0.93rem;
+    }
+
+    .workout-content {
+      padding: 16px;
+    }
+
+    .day-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .complete-button {
+      color: white;
+      background: var(--green);
+    }
+
+    .complete-button.is-complete {
+      color: var(--green);
+      background: var(--green-light);
+      border: 1px solid #8bd1a5;
+    }
+
+    .print-button {
+      color: var(--navy);
+      background: var(--blue-light);
+    }
+
+    .section {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin: 14px 0;
+      overflow: hidden;
+    }
+
+    .section-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      color: white;
+      background: var(--navy);
+      padding: 11px 13px;
+    }
+
+    .section-title h3 {
+      margin: 0;
+      font-size: 1rem;
+    }
+
+    .section-title .badge {
+      color: var(--navy);
+      background: white;
+      border-radius: 999px;
+      padding: 3px 8px;
+      white-space: nowrap;
+      font-size: 0.73rem;
+      font-weight: 800;
+    }
+
+    .section-body {
+      padding: 12px 13px;
+    }
+
+    .section-body p {
+      margin: 0 0 10px;
+    }
+
+    .section-body p:last-child {
+      margin-bottom: 0;
+    }
+
+    .exercise-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .exercise-list li {
+      border-bottom: 1px solid #e8edf2;
+      padding: 10px 0;
+    }
+
+    .exercise-list li:last-child {
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .exercise-list strong {
+      display: block;
+      color: var(--navy);
+      margin-bottom: 2px;
+    }
+
+    .exercise-list span {
+      color: #37485a;
+      font-size: 0.94rem;
+    }
+
+    .note {
+      border-left: 4px solid var(--blue);
+      background: var(--blue-light);
+      padding: 10px 11px;
+      border-radius: 6px;
+      margin: 10px 0;
+      color: #184f7d;
+      font-size: 0.92rem;
+    }
+
+    .warning {
+      border-left-color: var(--red);
+      background: var(--red-light);
+      color: #7e1a13;
+    }
+
+    .success {
+      border-left-color: var(--green);
+      background: var(--green-light);
+      color: #155d32;
+    }
+
+    .rest-card {
+      padding: 16px;
+      border: 1px solid #dce3e9;
+      border-radius: 12px;
+      background: #fbfcfd;
+    }
+
+    .rest-card h3 {
+      margin-top: 0;
+      color: var(--navy);
+    }
+
+    .compact-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      margin-top: 8px;
+    }
+
+    .compact-table th,
+    .compact-table td {
+      border: 1px solid var(--border);
+      padding: 8px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .compact-table th {
+      color: white;
+      background: var(--navy-2);
+    }
+
+    .footer-note {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 0.82rem;
+      text-align: center;
+    }
+
+    @media (max-width: 850px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .calendar-panel {
+        position: static;
+      }
+
+      .calendar {
+        padding-bottom: 8px;
+      }
+
+      .day-button,
+      .empty-day {
+        min-height: 48px;
+      }
+    }
+
+    @media print {
+      header,
+      .calendar-panel,
+      .notice,
+      .day-actions,
+      .footer-note {
+        display: none !important;
+      }
+
+      body {
+        background: white;
+      }
+
+      main {
+        max-width: none;
+        padding: 0;
+      }
+
+      .layout {
+        display: block;
+      }
+
+      .panel {
+        border: 0;
+        box-shadow: none;
+      }
+
+      .workout-heading {
+        color: black;
+        background: white;
+        padding: 0 0 10px;
+      }
+
+      .workout-heading p {
+        color: #333;
+      }
+
+      .section {
+        break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="header-inner">
+      <h1>Navy OCS Daily Training Plan</h1>
+      <p class="subtitle">
+        July 28, 2026 – September 13, 2026 · Push-Up, PRT, Running, Core, and OCS PT Preparation
+      </p>
+
+      <div class="top-actions">
+        <button class="header-button" id="todayButton">Go to Today</button>
+        <button class="header-button secondary" id="firstDayButton">Go to Start</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="notice">
+      <strong>Training rule:</strong> Dynamic mobility comes before workouts. Long static stretching comes after
+      the workout and cooldown walk. Stop if pain is sharp, worsening, or changes how you run or move.
+    </div>
+
+    <div class="layout">
+      <aside class="panel calendar-panel">
+        <div class="panel-header">
+          <h2>Training Calendar</h2>
+        </div>
+
+        <div class="calendar-controls">
+          <button id="prevMonth" aria-label="Previous month">← Prev</button>
+          <div id="monthLabel"></div>
+          <button id="nextMonth" aria-label="Next month">Next →</button>
+        </div>
+
+        <div class="calendar">
+          <div class="weekday-row">
+            <div class="weekday">Sun</div>
+            <div class="weekday">Mon</div>
+            <div class="weekday">Tue</div>
+            <div class="weekday">Wed</div>
+            <div class="weekday">Thu</div>
+            <div class="weekday">Fri</div>
+            <div class="weekday">Sat</div>
+          </div>
+
+          <div class="calendar-grid" id="calendarGrid"></div>
+        </div>
+
+        <div class="calendar-legend">
+          <span class="legend-dot" style="background:#1677c8;"></span> Training day
+          <span class="legend-dot" style="background:#d9d9d9;"></span> Rest/recovery
+          <span class="legend-dot" style="background:#197a43;"></span> Completed
+        </div>
+      </aside>
+
+      <section class="panel workout-panel">
+        <div class="workout-heading">
+          <h2 id="dayTitle">Select a Training Day</h2>
+          <p id="daySubtitle">Choose a date from the calendar to see your complete plan.</p>
+        </div>
+
+        <div class="workout-content" id="workoutContent"></div>
+      </section>
+    </div>
+
+    <p class="footer-note">
+      Completion status is stored only in this browser using local storage. It does not upload anywhere.
+    </p>
+  </main>
+
+  <script>
+    /*
+      ============================================================
+      NAVY OCS DAILY TRAINING PLAN
+      ============================================================
+
+      This is a self-contained training calendar.
+
+      All workout days use:
+      1. Dynamic warm-up
+      2. Main workout
+      3. Cooldown walk
+      4. Static stretching
+
+      Change schedule text below only if your plan changes.
+    */
+
+    const START_DATE = "2026-07-28";
+    const END_DATE = "2026-09-13";
+    const STORAGE_KEY = "navyOCSTrainingCompletedDays";
+
+    /*
+      ------------------------------------------------------------
+      WARM-UP LIBRARY
+      ------------------------------------------------------------
+    */
+
+    const warmups = {
+      push: {
+        title: "Dynamic Warm-Up — Push-Up / Upper-Body Session",
+        duration: "8–10 min",
+        intro: "Use before push-up volume, ladders, density work, or push-up confidence sessions. Do not do long static stretches before push-ups.",
+        items: [
+          ["Brisk walk or jog in place", "2 minutes"],
+          ["Arm circles forward", "15 reps"],
+          ["Arm circles backward", "15 reps"],
+          ["Shoulder rolls forward", "10 reps"],
+          ["Shoulder rolls backward", "10 reps"],
+          ["Arm swings across chest", "15 reps"],
+          ["Arm swings overhead and back", "15 reps"],
+          ["Wrist circles", "10 each direction"],
+          ["Palm-down wrist mobility pulses", "10 gentle pulses"],
+          ["Palm-up wrist mobility pulses", "10 gentle pulses"],
+          ["Scapular push-ups", "2 sets of 10"],
+          ["High-plank shoulder taps", "10 per side"],
+          ["Easy push-ups", "1 set of 8"],
+          ["Easy push-ups", "1 set of 10"],
+          ["Forearm plank", "20–30 sec"]
+        ],
+        note: "Wrist pulses are gentle movement, not deep stretching. Your wrists should feel warmer afterward, not painful."
+      },
+
+      easyRun: {
+        title: "Dynamic Warm-Up — Easy Run / Long Run",
+        duration: "10 min",
+        intro: "Use before easy runs, long runs, recovery jogs, and steady runs.",
+        items: [
+          ["Brisk walk", "3 minutes"],
+          ["Easy jog", "2–3 minutes"],
+          ["Ankle circles", "10 each direction per ankle"],
+          ["Ankle rocks: gently drive knee over toes", "10 per leg"],
+          ["Leg swings front/back", "10 per leg"],
+          ["Leg swings side-to-side", "10 per leg"],
+          ["Hip circles", "10 each direction"],
+          ["Walking knee hugs", "10 per leg"],
+          ["Walking quad pulls", "10 per leg"],
+          ["Walking lunges with reach", "8 per leg"],
+          ["Air squats", "10 reps"],
+          ["Calf raises", "15 reps"],
+          ["Toe raises", "15 reps"],
+          ["Easy jog into run", "1–2 minutes"]
+        ],
+        note: "Start leg swings small and controlled, then gradually increase range. Do not force range of motion."
+      },
+
+      hardRun: {
+        title: "Dynamic Warm-Up — Intervals, Tempo Run, or Timed 1.5-Mile",
+        duration: "15–20 min",
+        intro: "Use before road intervals, tempo runs, hard efforts, measured 1.5-mile runs, and 3-mile pace efforts.",
+        items: [
+          ["Brisk walk", "3 minutes"],
+          ["Easy jog", "5 minutes"],
+          ["Ankle circles", "10 each direction per ankle"],
+          ["Ankle rocks: gently drive knee over toes", "10 per leg"],
+          ["Leg swings front/back", "10 per leg"],
+          ["Leg swings side-to-side", "10 per leg"],
+          ["Hip circles", "10 each direction"],
+          ["Walking knee hugs", "10 per leg"],
+          ["Walking quad pulls", "10 per leg"],
+          ["Walking lunges with reach and rotation", "8 per leg"],
+          ["Air squats", "10 reps"],
+          ["Calf raises", "15 reps"],
+          ["Toe raises", "15 reps"],
+          ["High knees, controlled", "2 sets of 15 sec"],
+          ["Butt kicks, controlled", "2 sets of 15 sec"],
+          ["Relaxed stride", "15 sec"],
+          ["Walk/jog recovery", "45–60 sec"],
+          ["Relaxed stride", "15 sec"],
+          ["Walk/jog recovery", "45–60 sec"],
+          ["Relaxed stride", "15 sec"],
+          ["Walk/jog recovery", "45–60 sec"],
+          ["Relaxed stride", "15 sec"]
+        ],
+        note: "A stride is not a sprint. Gradually accelerate, run fast but relaxed, then gradually slow down. Use approximately 80–90% effort."
+      },
+
+      circuit: {
+        title: "Dynamic Warm-Up — OCS Calisthenics Circuit",
+        duration: "12–15 min",
+        intro: "Use before OCS-style HIIT, full-body bodyweight workouts, and calisthenics circuits.",
+        items: [
+          ["Brisk walk or easy jog", "3 minutes"],
+          ["Easy jumping jacks", "30 sec"],
+          ["Arm circles forward", "15 reps"],
+          ["Arm circles backward", "15 reps"],
+          ["Arm swings across chest", "15 reps"],
+          ["Wrist circles", "10 each direction"],
+          ["Ankle circles", "10 each direction per ankle"],
+          ["Leg swings front/back", "10 per leg"],
+          ["Leg swings side-to-side", "10 per leg"],
+          ["Hip circles", "10 each direction"],
+          ["Air squats", "15 reps"],
+          ["Reverse lunges", "6 per leg"],
+          ["Glute bridges", "10 reps"],
+          ["Calf raises", "15 reps"],
+          ["Toe raises", "15 reps"],
+          ["Scapular push-ups", "10 reps"],
+          ["Easy push-ups", "8 reps"],
+          ["Slow mountain climbers", "10 per leg"],
+          ["Forearm plank", "20–30 sec"],
+          ["Easy jumping jacks", "30 sec"]
+        ],
+        note: "Finish warm but not tired. The goal is to prepare for the circuit, not add extra fatigue."
+      },
+
+      mockPRT: {
+        title: "Dynamic Warm-Up — Mock PRT",
+        duration: "15 min",
+        intro: "Use before mock PRT days. This prepares you without tiring you out before the test.",
+        items: [
+          ["Brisk walk", "3 minutes"],
+          ["Easy jog", "3 minutes"],
+          ["Arm circles forward/backward", "10 each"],
+          ["Wrist circles", "10 each direction"],
+          ["Leg swings front/back", "10 per leg"],
+          ["Leg swings side-to-side", "10 per leg"],
+          ["Air squats", "10 reps"],
+          ["Reverse lunges", "5 per leg"],
+          ["Calf raises", "15 reps"],
+          ["Toe raises", "15 reps"],
+          ["Scapular push-ups", "10 reps"],
+          ["Easy push-ups", "1 set of 8"],
+          ["Easy push-ups", "1 set of 6"],
+          ["Forearm plank", "20 sec"],
+          ["Relaxed running stride", "15 sec"],
+          ["Walk recovery", "45 sec"],
+          ["Relaxed running stride", "15 sec"],
+          ["Walk recovery", "45 sec"],
+          ["Rest quietly", "2–3 minutes before beginning the mock PRT"]
+        ],
+        note: "Do not add extra push-ups, long planks, or static stretching immediately before the mock PRT."
+      },
+
+      recovery: {
+        title: "Easy Recovery Movement",
+        duration: "5 min",
+        intro: "Use before a recovery walk or rest-day mobility session.",
+        items: [
+          ["Easy walk", "3–5 minutes"],
+          ["Arm circles forward/backward", "10 each"],
+          ["Ankle circles", "10 each direction per ankle"],
+          ["Easy air squats", "10 reps"],
+          ["Easy calf raises", "10 reps"]
+        ],
+        note: "Keep this truly easy. Recovery days should make you feel better, not more tired."
+      }
+    };
+
+    /*
+      ------------------------------------------------------------
+      POST-WORKOUT COOLDOWN + STATIC STRETCHING
+      ------------------------------------------------------------
+    */
+
+    const cooldown = {
+      title: "Cooldown",
+      duration: "5–10 min",
+      intro: "After the workout, walk until breathing returns close to normal before static stretching.",
+      items: [
+        ["Easy walk", "5–10 minutes"],
+        ["Slow breathing", "1 minute; nasal breathing if comfortable"]
+      ]
+    };
+
+    const staticStretch = {
+      title: "Post-Workout Static Stretching",
+      duration: "10–14 min",
+      intro: "Do this after the cooldown walk. Hold each stretch at mild-to-moderate tension. No bouncing and no pain.",
+      items: [
+        ["Calf stretch — straight back knee", "2 x 30 sec per side"],
+        ["Soleus calf stretch — bent back knee", "2 x 30 sec per side"],
+        ["Quad stretch", "2 x 30 sec per side"],
+        ["Hamstring stretch", "2 x 30 sec per side"],
+        ["Hip-flexor stretch", "2 x 30 sec per side"],
+        ["Figure-4 glute stretch", "2 x 30 sec per side"],
+        ["Child's pose / lat stretch", "2 x 30 sec"],
+        ["Doorway chest stretch", "2 x 30 sec"],
+        ["Cross-body rear-shoulder stretch", "2 x 30 sec per arm"],
+        ["Triceps stretch", "2 x 30 sec per arm"],
+        ["Wrist flexor stretch", "2 x 20 sec per side"],
+        ["Wrist extensor stretch", "2 x 20 sec per side"]
+      ],
+      note: "For the hip-flexor stretch, squeeze the glute on the kneeling side and avoid arching the lower back. For the soleus stretch, keep the heel down and bend the back knee slightly."
+    };
+
+    /*
+      ------------------------------------------------------------
+      SCHEDULE DATA
+      ------------------------------------------------------------
+
+      Every day has:
+      date      = YYYY-MM-DD
+      title     = Workout title
+      type      = workout or rest
+      warmup    = warmup library key
+      blocks    = main-workout sections
+      note      = optional special instruction
+    */
+
+    const plan = [
+      {
+        date: "2026-07-28",
+        title: "Measured 3-Mile Run",
+        type: "workout",
+        warmup: "hardRun",
+        blocks: [
+          {
+            title: "Main Run",
+            items: [
+              ["3-mile run", "Run at a steady, controlled effort. Use your watch and record total time plus each mile split."],
+              ["Final 0.5 mile", "Slightly faster only if you feel good. Do not turn the whole run into an all-out race."]
+            ]
+          }
+        ],
+        note: "This run is for pace information. Record your total time and mile splits so future run efforts can be planned accurately."
+      },
+
+      {
+        date: "2026-07-29",
+        title: "Push-Up Volume + Legs + Core",
+        type: "workout",
+        warmup: "push",
+        blocks: [
+          {
+            title: "Push-Up Work",
+            items: [
+              ["Push-ups", "6 sets of 18 reps. Rest 90 sec between sets. Stop if form becomes poor."],
+              ["Pike push-ups", "3 sets of 10. Rest 60 sec."]
+            ]
+          },
+          {
+            title: "Leg Work",
+            items: [
+              ["Air squats", "3 sets of 25. Rest 60 sec."],
+              ["Split squats", "3 sets of 14 per leg. Rest 60 sec after both legs."]
+            ]
+          },
+          {
+            title: "Core + Back",
+            items: [
+              ["Forearm plank", "3 sets of 75 sec. Rest 60 sec."],
+              ["Side plank", "3 sets of 40 sec per side. Rest 45 sec after both sides."],
+              ["Dead bug", "3 sets of 10 per side. Rest 45 sec."],
+              ["Superman hold", "3 sets of 30 sec. Rest 45 sec."],
+              ["Optional: one-arm dumbbell row", "3 sets of 20 per side, slow controlled reps. Rest 60 sec after both sides."]
+            ]
+          }
+        ]
+      },
+
+      {
+        date: "2026-07-30",
+        title: "Road Intervals + Light Push-Ups",
+        type: "workout",
+        warmup: "hardRun",
+        blocks: [
+          {
+            title: "Run Intervals",
+            items: [
+              ["Hard interval", "Run hard for 1 minute. Fast and controlled; do not sprint all-out."],
+              ["Recovery", "Easy walk/jog for 90 sec."],
+              ["Repeat", "Complete 10 total hard intervals."],
+              ["Finish", "Easy walk/jog for 8–10 minutes."]
+            ]
+          },
+          {
+            title: "Post-Run Strength",
+            items: [
+              ["Easy push-ups", "4 sets of 12. Rest 90 sec."],
+              ["Calf raises", "3 sets of 25. Rest 45 sec."],
+              ["Toe raises", "3 sets of 20. Rest 45 sec."]
+            ]
+          }
+        ]
+      },
+
+      {
+        date: "2026-07-31",
+        title: "OCS-Style Circuit + Push-Up Fatigue Work",
+        type: "workout",
+        warmup: "circuit",
+        blocks: [
+          {
+            title: "OCS Circuit — 4 Rounds",
+            items: [
+              ["Push-ups", "40 sec work, then 20 sec rest."],
+              ["Air squats", "40 sec work, then 20 sec rest."],
+              ["Mountain climbers", "40 sec work, then 20 sec rest."],
+              ["Reverse lunges", "40 sec work, then 20 sec rest."],
+              ["Forearm plank", "40 sec work, then 20 sec rest."],
+              ["Shoulder taps", "40 sec work, then 20 sec rest."],
+              ["Flutter kicks", "40 sec work, then 20 sec rest."],
+              ["Supermans", "40 sec work, then rest 75 sec before the next round."]
+            ]
+          },
+          {
+            title: "Push-Up Fatigue Work",
+            items: [
+              ["Push-ups", "3 sets of 15. Rest 90 sec."],
+              ["Hollow hold", "3 sets of 25 sec. Rest 45 sec."]
+            ]
+          }
+        ]
+      },
+
+      {
+        date: "2026-08-01",
+        title: "1.5-Mile Baseline Run",
+        type: "workout",
+        warmup: "hardRun",
+        blocks: [
+          {
+            title: "Timed Run",
+            items: [
+              ["1.5-mile run", "Use a measured route or GPS watch. Run strong but controlled. Record time and splits if available."],
+              ["After the run", "Walk 10 minutes before the cooldown stretch."]
+            ]
+          },
+          {
+            title: "Light Core",
+            items: [
+              ["Forearm plank", "2 sets of 60 sec. Rest 60 sec."],
+              ["Side plank", "2 sets of 30 sec per side. Rest 45 sec after both sides."]
+            ]
+          }
+        ],
+        note: "Do not do a max push-up test today."
+      },
+
+      {
+        date: "2026-08-02",
+        title: "Rest + Light Mobility",
+        type: "rest",
+        warmup: "recovery",
+        blocks: [
+          {
+            title: "Recovery",
+            items: [
+              ["Easy walk", "15–30 minutes."],
+              ["Static stretching", "Complete the post-workout static stretching routine below."],
+              ["Optional easy push-ups", "Only if completely fresh: 2 sets of 10 easy reps. Skip if sore."]
+            ]
+          }
+        ]
+      },
+
+      {
+        date: "2026-08-03",
+        title: "Easy Run + Push-Up Volume",
+        type: "workout",
+        warmup: "easyRun",
+        blocks: [
+          {
+            title: "Easy Run",
+            items: [
+              ["Easy run", "25–30 minutes. You should be able to speak in full sentences."],
+              ["Relaxed strides", "4 x 15 sec. Walk 60 sec between strides."]
+            ]
+          },
+          {
+            title: "Push-Up + Core Work",
+            items: [
+              ["Push-ups", "6 sets of 18. Rest 90 sec."],
+              ["Forearm plank", "3 sets of 80 sec. Rest 60 sec."],
+              ["Side plank", "3 sets of 40 sec per side. Rest 45 sec after both sides."],
+              ["Curl-ups or crunches", "3 sets of 25. Rest 45 sec."],
+              ["Prone Y-T-W raises", "2 rounds of 10 Y raises, 10 T raises, and 10 W raises. Rest 45 sec between rounds."]
+            ]
+          }
+        ]
+      },
+
+      {
+        date: "2026-08-04",
+        title: "OCS Calisthenics Circuit",
+        type: "workout",
+        warmup: "circuit",
+        blocks: [
+          {
+            title: "OCS Circuit — 5 Rounds",
+            items: [
+              ["Round 1 push-up variation", "Regular push-ups."],
+              ["Round 2 push-up variation", "Wide push-ups."],
+              ["Round 3 push-up variation", "Hand-release push-ups."],
+              ["Round 4 push-up variation", "Regular push-ups."],
+              ["Round 5 push-up variation", "Close-grip push-ups or regular push-ups if close-grip form fails."],
+              ["Each round", "Do every exercise below for 40 sec, resting 20 sec between exercises. Rest 75 sec after each full round."],
+              ["Exercises in each round", "Push-ups, air squats, mountain climbers, reverse lunges, forearm plank, jumping jacks, shoulder taps, supermans."]
+            ]
+          }
+        ],
+        note: "If push-up form falls apart during a timed interval, hold the top push-up position rather than doing bad reps."
+      },
+
+      {
+        date: "2026-08-05",
+        title: "Intervals + Light Push-Ups",
+        type: "workout",
+        warmup: "hardRun",
+        blocks: [
+          {
+            title: "Run Intervals",
+            items: [
+              ["Hard interval", "90 sec hard."],
+              ["Recovery", "90 sec easy walk/jog."],
+              ["Repeat", "8 total hard intervals."],
+              ["Finish", "8–10 min easy walk/jog."]
+            ]
+          },
+          {
+            title: "Push-Up + Core Work",
+            items: [
+              ["Push-ups", "5 sets of 14. Rest 90 sec."],
+              ["Dead bug", "3 sets of 12 per side. Rest 45 sec."],
+              ["Hollow hold", "3 sets of 25 sec. Rest 45 sec."]
+            ]
+          }
+        ]
+      },
+
+      {
+        date: "2026-08-06",
+        title: "Recovery Walk + Push-Up Ladder",
+        type: "workout",
+        warmup: "recovery",
+        blocks: [
+          {
+            title: "Recovery Cardio",
+            items: [
+              ["Brisk walk", "35–45 minutes at an easy pace."]
+            ]
+          },
+          {
+            title: "Push-Up Ladder",
+            items: [
+              ["Push-ups", "5 - 10 - 15 - 20 - 15 - 10 - 5."],
+              ["Total", "80 push-ups."],
+              ["Rest", "20–45 sec between ladder rungs. Keep every rep clean."]
+            ]
+          },
+          {
+            title: "Legs + Core",
+            items: [
+              ["Wall sit", "3 sets of 60 sec. Rest 60 sec."],
+              ["Calf raises", "3 sets of 25. Rest 45 sec."],
+              ["Toe raises", "3 sets of 20. Rest 45 sec."],
+              ["Curl-ups or crunches", "3 sets of 25. Rest 45 sec."]
+            ]
+          }
+        ]
+      },
+
+      {
+        date: "2026-08-07",
+        title: "Pre-Mock PRT Tune-Up",
+        type: "workout",
+        warmup: "push",
+        blocks: [
+          {
+            title: "Light Preparation",
+            items: [
+              ["Optional easy jog or walk", "15–20 minutes, easy only."],
+              ["Easy push-ups", "3 sets of 12. Rest 90 sec."],
+              ["Forearm plank", "2 sets of 60 sec. Rest 60 sec."],
+              ["Side plank", "2 sets of 30 sec per side. Rest 45 sec after both sides."]
+            ]
+          }
+        ],
+        note: "Keep this easy. You are preparing to test tomorrow, not trying to improve fitness today."
+      },
+
+      {
+        date: "2026-08-08",
+        title: "Mock PRT #1",
+        type: "workout",
+        warmup: "mockPRT",
+        blocks: [
+          {
+            title: "Mock PRT — Perform in This Order",
+            items: [
+              ["Forearm plank", "Max clean hold. Stop when form fails."],
+              ["Rest", "5 minutes."],
+              ["Push-ups", "Max clean reps in 2 minutes. Rest only in the up position."],
+              ["Rest", "10–15 minutes."],
+              ["1.5-mile run", "Timed effort on a measured route."],
+              ["After test", "Walk 10 minutes, then complete static stretching."]
+            ]
+          },
+          {
+            title: "Goals",
+            items: [
+              ["Plank goal", "1:50 or better."],
+              ["Push-up goal", "45–50 clean reps."],
+              ["Run goal", "Record a true baseline or improve from August 1."]
+            ]
+          }
+        ],
+        note: "Record plank time, push-up count, 1.5-mile time, weather, and notes about pacing."
+      },
+
+      {
+        date: "2026-08-09",
+        title: "Full Rest",
+        type: "rest",
+        warmup: "recovery",
+        blocks: [
+          {
+            title: "Recovery Only",
+            items: [
+              ["Easy walk", "20 minutes."],
+              ["Static stretching", "Complete the post-workout static stretching routine below."],
+              ["Push-ups", "None today."]
+            ]
+          }
+        ]
+      },
+
+      {
+        date: "2026-08-10",
+        title: "Easy Run + Push-Up Volume",
+        type: "workout",
+        warmup: "easyRun",
+        blocks: [
+          {
+            title: "Easy Run",
+            items: [
+              ["Easy run", "30 minutes."],
+              ["Relaxed strides", "4 x 15 sec. Walk 60 sec between strides."]
+            ]
+          },
+          {
+            title: "Push-Up + Core Work",
+            items: [
+              ["Push-ups", "6 sets of 20. Rest 90–120 sec. If needed, do 6 x 18 instead."],
+              ["Forearm plank", "3 sets of 85 sec. Rest 60 sec."],
+              ["Side plank", "3 sets of 40 sec per side. Rest 45 sec after both sides."],
+              ["Curl-ups or crunches", "3 sets of 30. Rest 45 sec."],
+              ["Prone Y-T-W raises", "2 rounds of 10 each. Rest 45 sec."]
+            ]
+          }
+        ]
+      },
+
+      {
+        date: "2026-08-11",
+        title: "Longer Intervals + Light Push-Ups",
+        type: "workout",
+        warmup: "hardRun",
+        blocks: [
+          {
+            title: "Run Intervals",
+            items: [
+              ["Hard interval", "2 minutes hard."],
+              ["Recovery", "2 minutes easy walk/jog."],
+              ["Repeat", "6 total hard intervals."],
+              ["Finish", "8–10 min easy walk/jog."]
+            ]
+          },
+          {
+            title: "Post-Run Work",
+            items: [
+              ["Easy push-ups", "4 sets of 12. Rest 90 sec."],
+              ["Calf raises", "3 sets of 25. Rest 45 sec."],
+              ["Toe raises", "3 sets of 20. Rest 45 sec."]
+            ]
+          }
+        ]
+      },
+
+      {
+        date: "2026-08-12",
+        title: "OCS Circuit",
+        type: "workout",
+        warmup: "circuit",
+        blocks: [
+          {
+            title: "OCS Circuit — 4 to 5 Rounds",
+            items: [
+              ["Work format", "45 sec work and 15 sec rest between each exercise. Rest 75 sec after each round."],
+              ["Exercises", "Push-ups, air squats, mountain climbers, reverse lunges, forearm plank, jumping jacks, bicycle kicks, supermans."]
+            ]
+          }
+        ],
+        note: "Complete 4 rounds if fatigued. Complete 5 rounds only if form remains solid."
+      },
+
+      {
+        date: "2026-08-13",
+        title: "Recovery Walk + Bigger Push-Up Ladder",
+        type: "workout",
+        warmup: "recovery",
+        blocks: [
+          {
+            title: "Recovery Cardio",
+            items: [
+              ["Brisk walk", "40 minutes."]
+            ]
+          },
+          {
+            title: "Push-Up Ladder",
+            items: [
+              ["Push-ups", "10 - 15 - 20 - 25 - 20 - 15 - 10."],
+              ["Total", "115 push-ups."],
+              ["Rest", "30–60 sec between ladder rungs."],
+              ["Fallback option", "If 115 is too much: 5 - 10 - 15 - 20 - 15 - 10 - 5 for 80 total reps."]
+            ]
+          },
+          {
+            title: "Legs + Core",
+            items: [
+              ["Wall sit", "3 sets of 60 sec. Rest 60 sec."],
+              ["Split squats", "3 sets of 12 per leg. Rest 60 sec after both legs."],
+              ["Curl-ups or crunches", "3 sets of 30. Rest 45 sec."]
+            ]
+          }
+        ]
+      },
+
+      {
+        date: "2026-08-14",
+        title: "Tempo Run + Push-Up Density",
+        type: "workout",
+        warmup: "hardRun",
+        blocks: [
+          {
+            title: "Tempo Run",
+            items: [
+              ["Tempo interval 1", "8 minutes at tempo effort: hard but sustainable."],
+              ["Easy jog/walk", "3 minutes."],
+              ["Tempo interval 2", "8 minutes at tempo effort."],
+              ["Finish", "8 minutes easy walk/jog."]
+            ]
+          },
+          {
+            title: "Push-Up Density",
+            items: [
+              ["Timer", "8 minutes total."],
+              ["Push-ups", "5 reps every 30 seconds."],
+              ["Total", "80 push-ups."]
+            ]
+          },
+          {
+            title: "Core",
+            items: [
+              ["Flutter kicks", "3 sets of 30 sec. Rest 45 sec."],
+              ["Hollow hold", "3 sets of 25 sec. Rest 45 sec."],
+              ["Forearm plank", "1 set of 100 sec."]
+            ]
+          }
+        ]
+      },
+
+      {
+        date: "2026-08-15",
+        title: "Long Easy Run + Injury Prevention",
+        type: "workout",
+        warmup: "easyRun",
+        blocks: [
+          {
+            title: "Long Easy Run",
+            items: [
+              ["Easy run", "4 miles or 40–45 minutes."],
+              ["Effort", "Easy pace; you should be able to speak in short sentences."]
+            ]
+          },
+          {
+            title: "Injury Prevention",
+            items: [
+              ["Calf raises", "2 sets of 25. Rest 45 sec."],
+              ["Toe raises", "2 sets of 20. Rest 45 sec."],
+              ["Glute bridges", "2 sets of 20. Rest 45 sec."]
+            ]
+          }
+        ]
+      },
+
+      {
+        date: "2026-08-16",
+        title: "Rest or Very Light Push-Ups",
+        type: "rest",
+        warmup: "recovery",
+        blocks: [
+          {
+            title: "Recovery",
+            items: [
+              ["Easy walk", "15–30 minutes."],
+              ["Static stretching", "Complete the static stretching routine below."],
+              ["Optional easy push-ups", "Only if fresh and pain-free: 3 sets of 12. Skip if sore."]
+            ]
+          }
+        ]
+      },
+
+      {
+        date: "2026-08-17",
+        title: "Easy Run + Heavy Push-Up Volume",
+        type: "workout",
+        warmup: "easyRun",
+        blocks: [
+          {
+            title: "Easy Run",
+            items: [
+              ["Easy run", "25–30 minutes."],
+              ["Relaxed strides", "4 x 15 sec. Walk 60 sec between strides."]
+            ]
+          },
+          {
+            title: "Push-Up + Core Work",
+            items: [
+              ["Push-ups", "7 sets of 20. Rest 120 sec."],
+              ["Fallback push-up option", "20 - 20 - 18 - 18 - 18 - 16 - 16 if 7 x 20 is too difficult."],
+              ["Forearm plank", "3 sets of 90 sec. Rest 60 sec."],
+              ["Side plank", "3 sets of 45 sec per side. Rest 45 sec after both sides."],
+              ["Curl-ups or crunches", "3 sets of 35. Rest 45 sec."]
+            ]
+          }
+        ]
+      },
+
+      {
+        date: "2026-08-18",
+        title: "Longer Hard Intervals + Light Push-Ups",
+        type: "workout",
+        warmup: "hardRun",
+        blocks: [
+          {
+            title: "Run Intervals",
+            items: [
+              ["Hard interval", "4 minutes hard, controlled pace."],
+              ["Recovery", "2 min 30 sec easy walk/jog."],
+              ["Repeat", "4 total hard intervals."],
+              ["Finish", "10 minutes easy walk/jog."]
+            ]
+          },
+          {
+            title: "Post-Run Push-Ups",
+            items: [
+              ["Easy push-ups", "4 sets of 12. Rest 90 sec."]
+            ]
+          }
+        ]
+      },
+
+      {
+        date: "2026-08-19",
+        title: "OCS HIIT Circuit + Controlled Push-Up Finisher",
+        type: "workout",
+        warmup: "circuit",
+        blocks: [
+          {
+            title: "OCS HIIT Circuit — 5 Rounds",
+            items: [
+              ["Work format", "45 sec work and 15 sec rest between exercises. Rest 75 sec after each round."],
+              ["Exercises", "Push-ups, squats, shoulder taps, reverse lunges, mountain climbers, forearm plank, jumping jacks, supermans."]
+            ]
+          },
+          {
+            title: "Controlled Push-Up Finisher",
+            items: [
+              ["Rest", "Rest 5 minutes after the circuit."],
+              ["Push-ups", "One controlled 60-sec set. Do not max. Stop when form slows substantially or begins to degrade."]
+            ]
+          }
+        ]
+      },
+
+      {
+        date: "2026-08-20",
+        title: "Recovery Walk + Easy Push-Ups",
+        type: "workout",
+        warmup: "recovery",
+        blocks: [
+          {
+            title: "Recovery Cardio",
+            items: [
+              ["Brisk walk", "40 minutes."]
+            ]
+          },
+          {
+            title: "Easy Strength + Core",
+            items: [
+              ["Push-ups", "5 sets of 12. Rest 90 sec."],
+              ["Wall sit", "3 sets of 60 sec. Rest 60 sec."],
+              ["Calf raises", "3 sets of 25. Rest 45 sec."],
+              ["Toe raises", "3 sets of 20. Rest 45 sec."],
+              ["Dead bug", "3 sets of 12 per side. Rest 45 sec."]
+            ]
+          }
+        ]
+      },
+
+      {
+        date: "2026-08-21",
+        title: "Tempo Run + 100 Push-Up Density",
+        type: "workout",
+        warmup: "hardRun",
+        blocks: [
+          {
+            title: "Tempo Run",
+            items: [
+              ["Tempo run", "20 minutes at tempo effort."],
+              ["Finish", "8–10 minutes easy walk/jog."]
+            ]
+          },
+          {
+            title: "Push-Up Density",
+            items: [
+              ["Timer", "10 minutes total."],
+              ["Push-ups", "5 reps every 30 seconds."],
+              ["Total", "100 push-ups."]
+            ]
+          },
+          {
+            title: "Core",
+            items: [
+              ["Flutter kicks", "3 sets of 35 sec. Rest 45 sec."],
+              ["Bicycle kicks", "3 sets of 35 sec. Rest 45 sec."],
+              ["Hollow hold", "3 sets of 30 sec. Rest 45 sec."],
+              ["Forearm plank", "1 set of 120 sec."]
+            ]
+          }
+        ]
+      },
+
+      {
+        date: "2026-08-22",
+        title: "Long Easy Run",
+        type: "workout",
+        warmup: "easyRun",
+        blocks: [
+          {
+            title: "Long Run",
+            items: [
+              ["Easy run", "4.5–5 miles or 45–50 minutes."],
+              ["Effort", "Easy. Do not race this run."]
+            ]
+          }
+        ]
+      },
+
+      {
+        date: "2026-08-23",
+        title: "Full Rest",
+        type: "rest",
+        warmup: "recovery",
+        blocks: [
+          {
+            title: "Recovery Only",
+            items: [
+              ["Easy walk", "15–30 minutes if desired."],
+              ["Static stretching", "Complete the static stretching routine below."],
+              ["Push-ups", "None today."]
+            ]
+          }
+        ]
+      },
+
+      {
+        date: "2026-08-24",
+        title: "Easy Run + Push-Ups",
+        type: "workout",
+        warmup: "easyRun",
+        blocks: [
+          {
+            title: "Easy Run",
+            items: [
+              ["Easy run", "30 minutes."],
+              ["Relaxed strides", "4 x 15 sec. Walk 60 sec between strides."]
+            ]
+          },
+          {
+            title: "Push-Up + Core Work",
+            items: [
+              ["Push-ups", "5 sets of 20. Rest 90–120 sec."],
+              ["Forearm plank", "3 sets of 90 sec. Rest 60 sec."],
+              ["Side plank", "3 sets of 40 sec per side. Rest 45 sec after both sides."],
+              ["Curl-ups or crunches", "3 sets of 30. Rest 45 sec."]
+            ]
+          }
+        ]
+      },
+
+      {
+        date: "2026-08-25",
+        title: "Sharp Intervals + Light Push-Ups",
+        type: "workout",
+        warmup: "hardRun",
+        blocks: [
+          {
+            title: "Run Workout — Complete 3 Rounds",
+            items: [
+              ["Hard run", "3 minutes."],
+              ["Easy jog/walk", "2 minutes."],
+              ["Hard run", "2 minutes."],
+              ["Easy jog/walk", "2 minutes."],
+              ["Fast controlled run", "1 minute."],
+              ["Easy jog/walk", "3 minutes."],
+              ["Repeat", "Complete the above sequence 3 times."]
+            ]
+          },
+          {
+            title: "Push-Ups",
+            items: [
+              ["Push-ups", "4 sets of 12. Rest 90 sec."]
+            ]
+          }
+        ]
+      },
+
+      {
+        date: "2026-08-26",
+        title: "Moderate OCS Circuit",
+        type: "workout",
+        warmup: "circuit",
+        blocks: [
+          {
+            title: "OCS Circuit — 3 to 4 Rounds",
+            items: [
+              ["Work format", "40 sec work and 20 sec rest between exercises. Rest 75 sec after each round."],
+              ["Exercises", "Push-ups, air squats, mountain climbers, reverse lunges, forearm plank, jumping jacks, flutter kicks, supermans."]
+            ]
+          }
+        ],
+        note: "This is a reduced-volume circuit. Do not turn it into a maximum-effort day before the mock PRT."
+      },
+
+      {
+        date: "2026-08-27",
+        title: "Recovery + Light Push-Ups and Core",
+        type: "workout",
+        warmup: "recovery",
+        blocks: [
+          {
+            title: "Recovery Cardio",
+            items: [
+              ["Brisk walk", "35–45 minutes."]
+            ]
+          },
+          {
+            title: "Light Strength + Core",
+            items: [
+              ["Easy push-ups", "3 sets of 12. Rest 90 sec."],
+              ["Forearm plank", "2 sets of 60 sec. Rest 60 sec."],
+              ["Side plank", "2 sets of 30 sec per side. Rest 45 sec after both sides."]
+            ]
+          }
+        ]
+      },
+
+      {
+        date: "2026-08-28",
+        title: "Pre-Test Tune-Up",
+        type: "workout",
+        warmup: "easyRun",
+        blocks: [
+          {
+            title: "Very Light Preparation",
+            items: [
+              ["Easy jog or brisk walk", "15–20 minutes."],
+              ["Easy push-ups", "2 sets of 10. Rest 90 sec."],
+              ["Air squats", "2 sets of 15. Rest 60 sec."],
+              ["Light stretching", "Complete static stretching, but do not force deep stretches."]
+            ]
+          }
+        ],
+        note: "Keep this easy. Tomorrow is Mock PRT #2."
+      },
+
+      {
+        date: "2026-08-29",
+        title: "Mock PRT #2",
+        type: "workout",
+        warmup: "mockPRT",
+        blocks: [
+          {
+            title: "Mock PRT — Perform in This Order",
+            items: [
+              ["Forearm plank", "Max clean hold."],
+              ["Rest", "5 minutes."],
+              ["Push-ups", "Max clean reps in 2 minutes."],
+              ["Rest", "10–15 minutes."],
+              ["1.5-mile run", "Timed effort on a measured route."],
+              ["After test", "Walk 10 minutes, then complete static stretching."]
+            ]
+          },
+          {
+            title: "Goals",
+            items: [
+              ["Plank goal", "2:00 or better."],
+              ["Push-up goal", "50 or more clean reps."],
+              ["1.5-mile goal", "12:15 or faster; ideally 12:00 or faster."]
+            ]
+          }
+        ],
+        note: "Record all results. If you are below a target, do not panic or add random extra workouts. Continue the taper and sharpening work."
+      },
+
+      {
+        date: "2026-08-30",
+        title: "Full Rest",
+        type: "rest",
+        warmup: "recovery",
+        blocks: [
+          {
+            title: "Recovery Only",
+            items: [
+              ["Easy walk", "15–30 minutes if desired."],
+              ["Static stretching", "Complete the static stretching routine below."],
+              ["Push-ups", "None today."]
+            ]
+          }
+        ]
+      },
+
+      {
+        date: "2026-08-31",
+        title: "Easy Run + Maintenance Push-Ups",
+        type: "workout",
+        warmup: "easyRun",
+        blocks: [
+          {
+            title: "Easy Run",
+            items: [
+              ["Easy run", "25 minutes."],
+              ["Relaxed strides", "4 x 15 sec. Walk 60 sec between strides."]
+            ]
+          },
+          {
+            title: "Maintenance Strength",
+            items: [
+              ["Push-ups", "5 sets of 16. Rest 90 sec."],
+              ["Forearm plank", "3 sets of 75 sec. Rest 60 sec."],
+              ["Side plank", "2 sets of 40 sec per side. Rest 45 sec after both sides."],
+              ["Curl-ups or crunches", "2 sets of 25. Rest 45 sec."]
+            ]
+          }
+        ]
+      },
+
+      {
+        date: "2026-09-01",
+        title: "Moderate OCS Circuit",
+        type: "workout",
+        warmup: "circuit",
+        blocks: [
+          {
+            title: "OCS Circuit — 3 Rounds",
+            items: [
+              ["Work format", "40 sec work and 20 sec rest between exercises. Rest 75 sec after each round."],
+              ["Exercises", "Push-ups, squats, mountain climbers, reverse lunges, forearm plank, jumping jacks, bicycle kicks, supermans."]
+            ]
+          }
+        ],
+        note: "Keep this controlled. You should finish capable of doing more, not crushed."
+      },
+
+      {
+        date: "2026-09-02",
+        title: "Goal-Pace Intervals + Easy Push-Ups",
+        type: "workout",
+        warmup: "hardRun",
+        blocks: [
+          {
+            title: "Goal-Pace Intervals",
+            items: [
+              ["Goal pace", "For a 12:00 1.5-mile, aim near 8:00/mile pace."],
+              ["Goal-pace interval", "2 minutes."],
+              ["Recovery", "2 minutes easy walk/jog."],
+              ["Repeat", "6 total intervals."],
+              ["Finish", "8–10 min easy walk/jog."]
+            ]
+          },
+          {
+            title: "Easy Push-Ups",
+            items: [
+              ["Push-ups", "3 sets of 12. Rest 90 sec."]
+            ]
+          }
+        ]
+      },
+
+      {
+        date: "2026-09-03",
+        title: "Recovery Walk + Light Core",
+        type: "workout",
+        warmup: "recovery",
+        blocks: [
+          {
+            title: "Recovery Cardio",
+            items: [
+              ["Brisk walk", "35–45 minutes."]
+            ]
+          },
+          {
+            title: "Light Core + Push-Ups",
+            items: [
+              ["Forearm plank", "2 sets of 75 sec. Rest 60 sec."],
+              ["Side plank", "2 sets of 35 sec per side. Rest 45 sec after both sides."],
+              ["Dead bug", "2 sets of 10 per side. Rest 45 sec."],
+              ["Easy push-ups", "2 sets of 10. Rest 90 sec."]
+            ]
+          }
+        ]
+      },
+
+      {
+        date: "2026-09-04",
+        title: "Push-Up Confidence Session",
+        type: "workout",
+        warmup: "push",
+        blocks: [
+          {
+            title: "Controlled 2-Minute Push-Up Practice",
+            items: [
+              ["Push-ups", "Perform push-ups for up to 2 minutes."],
+              ["Target", "Stop at 47–50 clean reps even if you believe you could do more."],
+              ["Reason", "This proves you can meet the requirement while preserving recovery."],
+              ["Rest", "Rest 5 minutes."],
+              ["Backoff push-ups", "2 sets of 10–12. Rest 90 sec."]
+            ]
+          },
+          {
+            title: "Light Core",
+            items: [
+              ["Forearm plank", "2 sets of 60 sec. Rest 60 sec."]
+            ]
+          }
+        ],
+        note: "Do not max today. The point is confidence and technique."
+      },
+
+      {
+        date: "2026-09-05",
+        title: "Final 1.5-Mile Run Calibration",
+        type: "workout",
+        warmup: "hardRun",
+        blocks: [
+          {
+            title: "Measured Run",
+            items: [
+              ["1.5-mile run", "Use a measured route. Run strong and controlled."],
+              ["Goal", "12:00 or faster."],
+              ["After run", "Walk 10 minutes before stretching."]
+            ]
+          }
+        ],
+        note: "Do not perform a max push-up test today."
+      },
+
+      {
+        date: "2026-09-06",
+        title: "Full Rest",
+        type: "rest",
+        warmup: "recovery",
+        blocks: [
+          {
+            title: "Recovery Only",
+            items: [
+              ["Easy walk", "15–30 minutes if desired."],
+              ["Static stretching", "Complete the static stretching routine below."],
+              ["Push-ups", "None today."]
+            ]
+          }
+        ]
+      },
+
+      {
+        date: "2026-09-07",
+        title: "Easy Run + Light Push-Ups",
+        type: "workout",
+        warmup: "easyRun",
+        blocks: [
+          {
+            title: "Easy Run",
+            items: [
+              ["Easy run", "20 minutes."],
+              ["Relaxed strides", "4 x 10 sec. Fast but smooth. Walk 60 sec between strides."]
+            ]
+          },
+          {
+            title: "Light Push-Up + Core Work",
+            items: [
+              ["Push-ups", "3 sets of 12–15. Rest 90 sec."],
+              ["Forearm plank", "2 sets of 60 sec. Rest 60 sec."],
+              ["Side plank", "2 sets of 30 sec per side. Rest 45 sec after both sides."]
+            ]
+          }
+        ]
+      },
+
+      {
+        date: "2026-09-08",
+        title: "Light Calisthenics",
+        type: "workout",
+        warmup: "circuit",
+        blocks: [
+          {
+            title: "Light Circuit — 2 Easy Rounds",
+            items: [
+              ["Push-ups", "10 reps."],
+              ["Air squats", "15 reps."],
+              ["Reverse lunges", "8 per leg."],
+              ["Mountain climbers", "20 total reps."],
+              ["Forearm plank", "30 sec."],
+              ["Supermans", "20 sec."],
+              ["Rest", "60 sec after each round."]
+            ]
+          }
+        ],
+        note: "Finish this workout feeling better than when you started. Do not add extra work."
+      },
+
+      {
+        date: "2026-09-09",
+        title: "Short Pace Touch + Easy Push-Ups",
+        type: "workout",
+        warmup: "hardRun",
+        blocks: [
+          {
+            title: "Short Goal-Pace Workout",
+            items: [
+              ["Goal-pace interval", "2 minutes."],
+              ["Recovery", "2 minutes easy walk/jog."],
+              ["Repeat", "3 total intervals."],
+              ["Finish", "8 min easy walk/jog."]
+            ]
+          },
+          {
+            title: "Easy Push-Ups",
+            items: [
+              ["Push-ups", "2 sets of 10. Rest 90 sec."]
+            ]
+          }
+        ],
+        note: "This is only a short speed reminder. Do not turn it into a hard interval session."
+      },
+
+      {
+        date: "2026-09-10",
+        title: "Easy Movement",
+        type: "rest",
+        warmup: "recovery",
+        blocks: [
+          {
+            title: "Recovery",
+            items: [
+              ["Easy walk", "20–30 minutes."],
+              ["Static stretching", "Complete the static stretching routine below."],
+              ["Push-ups", "None."],
+              ["Hard running", "None."]
+            ]
+          }
+        ]
+      },
+
+      {
+        date: "2026-09-11",
+        title: "Rest Day",
+        type: "rest",
+        warmup: "recovery",
+        blocks: [
+          {
+            title: "Rest",
+            items: [
+              ["Easy walk", "10–15 minutes."],
+              ["Light mobility", "5–10 minutes only."],
+              ["Push-ups", "None."],
+              ["Running", "None."],
+              ["Hard core work", "None."]
+            ]
+          }
+        ],
+        note: "Prioritize food, hydration, sleep, and packing/preparation."
+      },
+
+      {
+        date: "2026-09-12",
+        title: "Mobility Only",
+        type: "rest",
+        warmup: "recovery",
+        blocks: [
+          {
+            title: "Very Light Movement",
+            items: [
+              ["Easy walk", "10 minutes."],
+              ["Arm circles forward", "10 reps."],
+              ["Arm circles backward", "10 reps."],
+              ["Air squats", "10 reps."],
+              ["Easy push-ups", "2 sets of 8. Rest 90 sec."],
+              ["Static stretching", "Complete the routine below, gently."]
+            ]
+          }
+        ],
+        note: "Do not do more. The objective is to arrive at OCS fresh."
+      },
+
+      {
+        date: "2026-09-13",
+        title: "Report to OCS",
+        type: "rest",
+        warmup: "recovery",
+        blocks: [
+          {
+            title: "Report Day",
+            items: [
+              ["Workout", "No workout."],
+              ["Priority", "Arrive healthy, hydrated, fed, organized, and rested."],
+              ["Mindset", "You have completed the preparation. Do not try to gain fitness today."]
+            ]
+          }
+        ],
+        note: "No hero workout. Report ready."
+      }
+    ];
+
+    /*
+      ------------------------------------------------------------
+      APPLICATION LOGIC
+      ------------------------------------------------------------
+    */
+
+    const planByDate = Object.fromEntries(plan.map(day => [day.date, day]));
+
+    let selectedDate = START_DATE;
+    let displayedMonth = new Date("2026-07-01T12:00:00");
+
+    function parseDate(dateString) {
+      return new Date(dateString + "T12:00:00");
+    }
+
+    function formatDate(dateString) {
+      return parseDate(dateString).toLocaleDateString("en-US", {
+        weekday: "long",
+        month: "long",
+        day: "numeric",
+        year: "numeric"
+      });
+    }
+
+    function getCompletedDays() {
+      try {
+        return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+      } catch {
+        return [];
+      }
+    }
+
+    function setCompletedDays(days) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(days));
+    }
+
+    function isCompleted(dateString) {
+      return getCompletedDays().includes(dateString);
+    }
+
+    function toggleCompleted(dateString) {
+      const completed = getCompletedDays();
+
+      if (completed.includes(dateString)) {
+        setCompletedDays(completed.filter(day => day !== dateString));
+      } else {
+        completed.push(dateString);
+        setCompletedDays(completed);
+      }
+
+      renderCalendar();
+      renderWorkout(selectedDate);
+    }
+
+    function listHTML(items) {
+      return `
+        <ul class="exercise-list">
+          ${items.map(([name, detail]) => `
+            <li>
+              <strong>${name}</strong>
+              <span>${detail}</span>
+            </li>
+          `).join("")}
+        </ul>
+      `;
+    }
+
+    function sectionHTML(title, duration, intro, items, note = "") {
+      return `
+        <section class="section">
+          <div class="section-title">
+            <h3>${title}</h3>
+            ${duration ? `<span class="badge">${duration}</span>` : ""}
+          </div>
+          <div class="section-body">
+            ${intro ? `<p>${intro}</p>` : ""}
+            ${listHTML(items)}
+            ${note ? `<div class="note">${note}</div>` : ""}
+          </div>
+        </section>
+      `;
+    }
+
+    function renderWorkout(dateString) {
+      const day = planByDate[dateString];
+
+      if (!day) {
+        document.getElementById("dayTitle").textContent = "No Training Plan Scheduled";
+        document.getElementById("daySubtitle").textContent = "Select a blue calendar day between July 28 and September 13, 2026.";
+        document.getElementById("workoutContent").innerHTML = `
+          <div class="rest-card">
+            <h3>No scheduled plan</h3>
+            <p>Select a date with a blue or gray background from the calendar.</p>
+          </div>
+        `;
+        return;
+      }
+
+      const warmup = warmups[day.warmup];
+      const completed = isCompleted(dateString);
+
+      document.getElementById("dayTitle").textContent = day.title;
+      document.getElementById("daySubtitle").textContent =
+        `${formatDate(day.date)} · ${day.type === "rest" ? "Recovery / Rest Day" : "Training Day"}`;
+
+      let html = `
+        <div class="day-actions">
+          <button class="complete-button ${completed ? "is-complete" : ""}" id="completeDayButton">
+            ${completed ? "✓ Completed — Mark Incomplete" : "Mark Day Complete"}
+          </button>
+          <button class="print-button" onclick="window.print()">Print This Day</button>
+        </div>
+      `;
+
+      if (day.note) {
+        html += `<div class="note ${day.type === "rest" ? "success" : ""}">${day.note}</div>`;
+      }
+
+      html += sectionHTML(
+        "Step 1 — Warm-Up",
+        warmup.duration,
+        warmup.intro,
+        warmup.items,
+        warmup.note
+      );
+
+      day.blocks.forEach((block, index) => {
+        html += sectionHTML(
+          `Step ${index + 2} — ${block.title}`,
+          "",
+          "",
+          block.items,
+          block.note || ""
+        );
+      });
+
+      html += sectionHTML(
+        `Step ${day.blocks.length + 2} — Cooldown`,
+        cooldown.duration,
+        cooldown.intro,
+        cooldown.items
+      );
+
+      html += sectionHTML(
+        `Step ${day.blocks.length + 3} — Static Stretching`,
+        staticStretch.duration,
+        staticStretch.intro,
+        staticStretch.items,
+        staticStretch.note
+      );
+
+      if (day.type === "workout") {
+        html += `
+          <div class="note warning">
+            <strong>Stop/adjust rule:</strong> If pain is sharp, worsening, or changes your running stride or movement,
+            stop that exercise. Replace a painful run with an easy walk and reduce push-up volume if shoulder, elbow,
+            or wrist pain appears.
+          </div>
+        `;
+      }
+
+      document.getElementById("workoutContent").innerHTML = html;
+
+      document.getElementById("completeDayButton").addEventListener("click", () => {
+        toggleCompleted(dateString);
+      });
+    }
+
+    function dateToKey(year, monthIndex, day) {
+      const month = String(monthIndex + 1).padStart(2, "0");
+      const date = String(day).padStart(2, "0");
+      return `${year}-${month}-${date}`;
+    }
+
+    function renderCalendar() {
+      const grid = document.getElementById("calendarGrid");
+      const label = document.getElementById("monthLabel");
+      grid.innerHTML = "";
+
+      const year = displayedMonth.getFullYear();
+      const month = displayedMonth.getMonth();
+
+      label.textContent = displayedMonth.toLocaleDateString("en-US", {
+        month: "long",
+        year: "numeric"
+      });
+
+      const firstDayOfWeek = new Date(year, month, 1).getDay();
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+      for (let i = 0; i < firstDayOfWeek; i++) {
+        const blank = document.createElement("div");
+        blank.className = "empty-day";
+        grid.appendChild(blank);
+      }
+
+      for (let dayNumber = 1; dayNumber <= daysInMonth; dayNumber++) {
+        const dateKey = dateToKey(year, month, dayNumber);
+        const workoutDay = planByDate[dateKey];
+        const button = document.createElement("button");
+
+        button.className = "day-button";
+        button.textContent = dayNumber;
+        button.setAttribute("aria-label", dateKey);
+
+        if (workoutDay) {
+          button.classList.add(workoutDay.type === "rest" ? "rest-day" : "has-workout");
+
+          if (dateKey === selectedDate) {
+            button.classList.add("selected");
+          }
+
+          if (isCompleted(dateKey)) {
+            button.classList.add("completed");
+          }
+
+          button.addEventListener("click", () => {
+            selectedDate = dateKey;
+            renderCalendar();
+            renderWorkout(selectedDate);
+
+            if (window.innerWidth < 851) {
+              document.querySelector(".workout-panel").scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+              });
+            }
+          });
+        } else {
+          button.disabled = true;
+          button.style.opacity = "0.35";
+          button.style.cursor = "default";
+        }
+
+        grid.appendChild(button);
+      }
+    }
+
+    function goToDate(dateString) {
+      const date = parseDate(dateString);
+      displayedMonth = new Date(date.getFullYear(), date.getMonth(), 1);
+      selectedDate = dateString;
+      renderCalendar();
+      renderWorkout(selectedDate);
+
+      if (window.innerWidth < 851) {
+        document.querySelector(".workout-panel").scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+      }
+    }
+
+    document.getElementById("prevMonth").addEventListener("click", () => {
+      displayedMonth = new Date(displayedMonth.getFullYear(), displayedMonth.getMonth() - 1, 1);
+      renderCalendar();
+    });
+
+    document.getElementById("nextMonth").addEventListener("click", () => {
+      displayedMonth = new Date(displayedMonth.getFullYear(), displayedMonth.getMonth() + 1, 1);
+      renderCalendar();
+    });
+
+    document.getElementById("firstDayButton").addEventListener("click", () => {
+      goToDate(START_DATE);
+    });
+
+    document.getElementById("todayButton").addEventListener("click", () => {
+      const now = new Date();
+      const todayKey = [
+        now.getFullYear(),
+        String(now.getMonth() + 1).padStart(2, "0"),
+        String(now.getDate()).padStart(2, "0")
+      ].join("-");
+
+      if (planByDate[todayKey]) {
+        goToDate(todayKey);
+      } else {
+        goToDate(START_DATE);
+        alert("Today is outside the training-plan date range. Showing the first plan day.");
+      }
+    });
+
+    renderCalendar();
+    renderWorkout(selectedDate);
+  </script>
+</body>
+</html>
