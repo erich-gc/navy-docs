@@ -192,49 +192,49 @@ const NAVY_STUDY_DATA = {
       id: "chain-10",
       prompt: "Who is the tenth person in your Chain of Command?",
       answer:
-        "Command Master Chief, Officer Training Command Newport — Master Chief Petty Officer Nicolas R. Albanese"
+        "Command Master Chief, Officer Training Command Newport — Master Chief Petty Officer Albanese"
     },
     {
       id: "chain-11",
       prompt: "Who is the eleventh person in your Chain of Command?",
       answer:
-        "Executive Officer, Officer Training Command Newport — Commander Katherine G. Martinez Alvarez"
+        "Executive Officer, Officer Training Command Newport — Commander Martinez Alvarez"
     },
     {
       id: "chain-12",
       prompt: "Who is the twelfth person in your Chain of Command?",
       answer:
-        "Commanding Officer, Officer Training Command Newport — Captain Matthew M. Pianetta"
+        "Commanding Officer, Officer Training Command Newport — Captain Pianetta"
     },
     {
       id: "chain-13",
       prompt: "Who is the thirteenth person in your Chain of Command?",
       answer:
-        "Commander, Naval Service Training Command — Rear Adm. Matthew T. Pottenburgh"
+        "Commander, Naval Service Training Command — Rear Admiral Pottenburgh"
     },
     {
       id: "chain-14",
       prompt: "Who is the fourteenth person in your Chain of Command?",
       answer:
-        "Commander, Naval Education and Training Command — Rear Admiral Gregory C. Huffman"
+        "Commander, Naval Education and Training Command — Rear Admiral Huffman"
     },
     {
       id: "chain-15",
       prompt: "Who is the fifteenth person in your Chain of Command?",
       answer:
-        "Chief of Naval Personnel — Vice Admiral Jeffrey Czerewko"
+        "Chief of Naval Personnel — Vice Admiral Czerewko"
     },
     {
       id: "chain-16",
       prompt: "Who is the sixteenth person in your Chain of Command?",
       answer:
-        "Chief of Naval Operations — Admiral Daryl Caudle"
+        "Chief of Naval Operations — Admiral Caudle"
     },
     {
       id: "chain-17",
       prompt: "Who is the seventeenth person in your Chain of Command?",
       answer:
-        "Secretary of the Navy — Hung Cao is the Acting Secretary of the Navy right now"
+        "Secretary of the Navy — Hung Cao (acting)"
     },
     {
       id: "chain-18",
