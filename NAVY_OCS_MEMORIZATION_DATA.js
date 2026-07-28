@@ -333,67 +333,67 @@ const NAVY_STUDY_DATA = {
       id: "navy-o1",
       prompt: "What is a Navy O-1?",
       answer:
-        "An O-1 in the United States Navy is an Ensign. His/her insignia is a one gold bar collar device."
+        "An O-1 in the United States Navy is an Ensign. His/her insignia is a one gold bar collar device, or one 1/2-inch gold stripe outboard of one gold five-pointed star on black shoulder boards, or one 1/2-inch gold stripe below one gold five-pointed star on service dress blue uniform sleeves."
     },
     {
       id: "navy-o2",
       prompt: "What is a Navy O-2?",
       answer:
-        "An O-2 in the United States Navy is a Lieutenant Junior Grade. His/her insignia is a one silver bar collar device."
+        "An O-2 in the United States Navy is a Lieutenant Junior Grade. His/her insignia is a one silver bar collar device, or one 1/2-inch gold stripe outboard of one 1/4-inch gold stripe outboard of one gold five-pointed star on black shoulder boards, or one 1/2-inch gold stripe below one 1/4-inch gold stripe below one gold five-pointed star on service dress blue uniform sleeves."
     },
     {
       id: "navy-o3",
       prompt: "What is a Navy O-3?",
       answer:
-        "An O-3 in the United States Navy is a Lieutenant. His/her insignia is a two silver bar collar device."
+        "An O-3 in the United States Navy is a Lieutenant. His/her insignia is a two silver bar collar device, or two 1/2-inch gold stripes outboard of one gold five-pointed star on black shoulder boards, or two 1/2-inch gold stripes below one gold five-pointed star on service dress blue uniform sleeves."
     },
     {
       id: "navy-o4",
       prompt: "What is a Navy O-4?",
       answer:
-        "An O-4 in the United States Navy is a Lieutenant Commander. His/her insignia is a one gold oak leaf collar device."
+        "An O-4 in the United States Navy is a Lieutenant Commander. His/her insignia is a one gold oak leaf collar device, or one 1/2-inch gold stripe outboard of one 1/4-inch gold stripe outboard of one 1/2-inch gold stripe outboard of one gold five-pointed star on black shoulder boards, or one 1/2-inch gold stripe below one 1/4-inch gold stripe below one 1/2-inch gold stripe below one gold-five pointed star on service dress blue uniform sleeves."
     },
     {
       id: "navy-o5",
       prompt: "What is a Navy O-5?",
       answer:
-        "An O-5 in the United States Navy is a Commander. His/her insignia is a one silver oak leaf collar device."
+        "An O-5 in the United States Navy is a Commander. His/her insignia is a one silver oak leaf collar device, or three 1/2-inch gold stripes outboard of one gold five-pointed star on black shoulder boards, or three 1/2-inch gold stripes below one gold five-pointed star on service dress blue uniform sleeves."
     },
     {
       id: "navy-o6",
       prompt: "What is a Navy O-6?",
       answer:
-        "An O-6 in the United States Navy is a Captain. His/her insignia is a one silver eagle collar device."
+        "An O-6 in the United States Navy is a Captain. His/her insignia is a one silver eagle collar device, or four 1/2-inch gold stripes outboard of one gold five-pointed star on black shoulder boards, or four 1/2-inch gold stripes below one gold five-pointed star on service dress blue uniform sleeves."
     },
     {
       id: "navy-o7",
       prompt: "What is a Navy O-7?",
       answer:
-        "An O-7 in the United States Navy is a Rear Admiral (Lower Half). His/her insignia is a one silver five-pointed star collar device."
+        "An O-7 in the United States Navy is a Rear Admiral (Lower Half). His/her insignia is a one silver five-pointed star collar device, or one silver five-pointed star outboard of one silver fouled anchor on gold shoulder boards, or one two-inch gold stripe below one gold five-pointed star on service dress blue uniform sleeves."
     },
     {
       id: "navy-o8",
       prompt: "What is a Navy O-8?",
       answer:
-        "An O-8 in the United States Navy is a Rear Admiral (Upper Half). His/her insignia is a two silver five-pointed star collar device."
+        "An O-8 in the United States Navy is a Rear Admiral (Upper Half). His/her insignia is a two silver five-pointed star collar device, or two silver five-pointed stars outboard of one silver fouled anchor on gold shoulder boards, or one two-inch gold stripe below one 1/2-inch gold stripe below one gold five-pointed star on service dress blue uniform sleeves."
     },
     {
       id: "navy-o9",
       prompt: "What is a Navy O-9?",
       answer:
-        "An O-9 in the United States Navy is a Vice Admiral. His/her insignia is a three silver five-pointed star collar device."
+        "An O-9 in the United States Navy is a Vice Admiral. His/her insignia is a three silver five-pointed star collar device, or three silver five-pointed stars outboard of one silver fouled anchor on gold shoulder boards, or one two-inch gold stripe below two 1/2-inch gold stripes below one gold five-pointed star on service dress blue uniform sleeves."
     },
     {
       id: "navy-o10",
       prompt: "What is a Navy O-10?",
       answer:
-        "An O-10 in the United States Navy is an Admiral. His/her insignia is a four silver five-pointed star collar device."
+        "An O-10 in the United States Navy is an Admiral. His/her insignia is a four silver five-pointed star collar device, or four silver five-pointed stars outboard of one silver fouled anchor on gold shoulder boards, or one two-inch gold stripe below three 1/2-inch gold stripes below one gold five-pointed star on service dress blue uniform sleeves."
     },
     {
       id: "navy-o11",
       prompt: "What is a Navy O-11?",
       answer:
-        "An O-11 in the United States Navy is a Fleet Admiral. His/her insignia is a five silver five-pointed star collar device."
+        "An O-11 in the United States Navy is a Fleet Admiral. His/her insignia is a five silver five-pointed star collar device, or five silver five-pointed stars outboard of one silver fouled anchor on gold shoulder boards, or one two-inch gold stripe below four 1/2-inch gold stripes below one gold five-pointed star on service dress blue uniform sleeves."
     }
   ],
 
@@ -438,19 +438,230 @@ const NAVY_STUDY_DATA = {
       id: "navy-e7",
       prompt: "What is a Navy E-7?",
       answer:
-        "An E-7 in the United States Navy is a Chief Petty Officer. His/her insignia is three chevrons below one rocker below one eagle."
+        "An E-7 in the United States Navy is a Chief Petty Officer. His/her insignia is three chevrons below one rocker below one eagle. In khaki uniform, the insignia will be a gold fouled anchor collar device with a silver USN superimposed across the anchor."
     },
     {
       id: "navy-e8",
       prompt: "What is a Navy E-8?",
       answer:
-        "An E-8 in the United States Navy is a Senior Chief Petty Officer. His/her insignia is three chevrons below one rocker below one eagle below one star."
+        "An E-8 in the United States Navy is a Senior Chief Petty Officer. His/her insignia is three chevrons below one rocker below one eagle below one star centered above the eagle. In khaki uniform, the insignia will be a gold fouled anchor collar device with a silver USN superimposed across the anchor below one silver star."
     },
     {
       id: "navy-e9",
       prompt: "What is a Navy E-9?",
       answer:
-        "An E-9 in the United States Navy is a Master Chief Petty Officer. His/her insignia is three chevrons below one rocker below one eagle below two stars."
+        "An E-9 in the United States Navy is a Master Chief Petty Officer. His/her insignia is three chevrons below one rocker below one eagle below two stars centered above the eagle. In khaki uniform, the insignia will be a gold fouled anchor collar device with a silver USN superimposed across the anchor below two silver stars."
+    },
+    {
+      id: "navy-e9n",
+      prompt: "What is the lone E-9 of the Navy?",
+      answer:
+        "The Master Chief Petty Officer of the Navy is an E-9. His/her insignia is three chevrons below one rocker below one eagle below three stars centered above the eagle. In khaki uniform, the insignia will be a gold fouled anchor collar device with a silver USN superimposed across the anchor below three silver stars."
+    }
+
+  ],
+
+  "Navy Warrant Officer Ranks": [
+    {
+      id: "navy-w1",
+      prompt: "What is a Navy W-1?",
+      answer:
+        "A W-1 in the United States Navy is a Warrant Officer 1 (WO1). His/her insignia is a single bar collar device with a blue background and one gold break, or a gold 1/4-inch stripe with three blue breaks on a black shoulder board or the service dress blue uniform sleeve."
+    },
+    {
+      id: "navy-w2",
+      prompt: "What is a Navy W-2?",
+      answer:
+        "A W-2 in the United States Navy is a Chief Warrant Officer 2 (CWO2). His/her insignia is a single bar collar device with a blue background and two gold breaks, or a gold 1/2-inch stripe with three blue breaks on a black shoulder board or the service dress blue uniform sleeve."
+    },
+    {
+      id: "navy-w3",
+      prompt: "What is a Navy W-3?",
+      answer:
+        "A W-3 in the United States Navy is a Chief Warrant Officer 3 (CWO3). His/her insignia is a single bar collar device with a blue background and one silver break, or a gold 1/2-inch stripe with two blue breaks on a black shoulder board or the service dress blue uniform sleeve."
+    },
+    {
+      id: "navy-w4",
+      prompt: "What is a Navy W-4?",
+      answer:
+        "A W-4 in the United States Navy is a Chief Warrant Officer 4 (CWO4). His/her insignia is a single bar collar device with a blue background and two silver breaks, or a gold 1/2-inch stripe with one blue break on a black shoulder board or the service dress blue uniform sleeve."
+    },
+    {
+      id: "navy-w5",
+      prompt: "What is a Navy W-5?",
+      answer:
+        "A W-5 in the United States Navy is a Chief Warrant Officer 5 (CWO5). His/her insignia is a single bar collar device with a silver background and a horizontal blue line, or a gold 1/2-inch stripe with a horizontal line and a blue break on a black shoulder board or the service dress blue uniform sleeve."
+    }
+  ],
+
+  "Marine Corps Officer Ranks": [
+    {
+      id: "marine-o1",
+      prompt: "What is a Marine Corps O-1?",
+      answer:
+        "An O-1 in the United States Marine Corps is a Second Lieutenant. His/her insignia is a one gold bar collar device."
+    },
+    {
+      id: "marine-o2",
+      prompt: "What is a Marine Corps O-2?",
+      answer:
+        "An O-2 in the United States Marine Corps is a First Lieutenant. His/her insignia is a one silver bar collar device."
+    },
+    {
+      id: "marine-o3",
+      prompt: "What is a Marine Corps O-3?",
+      answer:
+        "An O-3 in the United States Marine Corps is a Captain. His/her insignia is a two silver bar collar device."
+    },
+    {
+      id: "marine-o4",
+      prompt: "What is a Marine Corps O-4?",
+      answer:
+        "An O-4 in the United States Marine Corps is a Major. His/her insignia is a one gold oak leaf collar device."
+    },
+    {
+      id: "marine-o5",
+      prompt: "What is a Marine Corps O-5?",
+      answer:
+        "An O-5 in the United States Marine Corps is a Lieutenant Colonel. His/her insignia is a one silver oak leaf collar device."
+    },
+    {
+      id: "marine-o6",
+      prompt: "What is a Marine Corps O-6?",
+      answer:
+        "An O-6 in the United States Marine Corps is a Colonel. His/her insignia is a one silver eagle collar device."
+    },
+    {
+      id: "marine-o7",
+      prompt: "What is a Marine Corps O-7?",
+      answer:
+        "An O-7 in the United States Marine Corps is a Brigadier General. His/her insignia is a one silver star collar device."
+    },
+    {
+      id: "marine-o8",
+      prompt: "What is a Marine Corps O-8?",
+      answer:
+        "An O-8 in the United States Marine Corps is a Major General. His/her insignia is two silver stars collar device."
+    },
+    {
+      id: "marine-o9",
+      prompt: "What is a Marine Corps O-9?",
+      answer:
+        "An O-9 in the United States Marine Corps is a Lieutenant General. His/her insignia is three silver stars collar device."
+    },
+    {
+      id: "marine-o10",
+      prompt: "What is a Marine Corps O-10?",
+      answer:
+        "An O-10 in the United States Marine Corps is a General. His/her insignia is four silver stars collar device."
+    }
+  ],
+
+  "Marine Corps Warrant Officer Ranks": [
+    {
+      id: "marine-w1",
+      prompt: "What is a Marine Corps W-1?",
+      answer:
+        "A W-1 in the United States Marine Corps is a Warrant Officer (WO). His/her insignia is a bar with a red background and one gold break."
+    },
+    {
+      id: "marine-w2",
+      prompt: "What is a Marine Corps W-2?",
+      answer:
+        "A W-2 in the United States Marine Corps is a Chief Warrant Officer 2 (CWO2). His/her insignia is a bar with a red background and two gold breaks."
+    },
+    {
+      id: "marine-w3",
+      prompt: "What is a Marine Corps W-3?",
+      answer:
+        "A W-3 in the United States Marine Corps is a Chief Warrant Officer 3 (CWO3). His/her insignia is a bar with a red background and one silver break."
+    },
+    {
+      id: "marine-w4",
+      prompt: "What is a Marine Corps W-4?",
+      answer:
+        "A W-4 in the United States Marine Corps is a Chief Warrant Officer 4 (CWO4). His/her insignia is a bar with a red background and two silver breaks."
+    },
+    {
+      id: "marine-w5",
+      prompt: "What is a Marine Corps W-5?",
+      answer:
+        "A W-5 in the United States Marine Corps is a Chief Warrant Officer 5 (CWO5). His/her insignia is a bar with a silver background and a horizontal red line."
+    }
+  ],
+
+  "Marine Corps Enlisted Ranks": [
+    {
+      id: "marine-e1",
+      prompt: "What is a Marine Corps E-1?",
+      answer:
+        "An E-1 in the United States Marine Corps is a Private. He/she has no insignia."
+    },
+    {
+      id: "marine-e2",
+      prompt: "What is a Marine Corps E-2?",
+      answer:
+        "An E-2 in the United States Marine Corps is a Private First Class. His/her insignia is one chevron."
+    },
+    {
+      id: "marine-e3",
+      prompt: "What is a Marine Corps E-3?",
+      answer:
+        "An E-3 in the United States Marine Corps is a Lance Corporal. His/her insignia is one chevron over crossed rifles."
+    },
+    {
+      id: "marine-e4",
+      prompt: "What is a Marine Corps E-4?",
+      answer:
+        "An E-4 in the United States Marine Corps is a Corporal. His/her insignia is two chevrons over crossed rifles."
+    },
+    {
+      id: "marine-e5",
+      prompt: "What is a Marine Corps E-5?",
+      answer:
+        "An E-5 in the United States Marine Corps is a Sergeant. His/her insignia is three chevrons over crossed rifles."
+    },
+    {
+      id: "marine-e6",
+      prompt: "What is a Marine Corps E-6?",
+      answer:
+        "An E-6 in the United States Marine Corps is a Staff Sergeant. His/her insignia is three chevrons over crossed rifles over one rocker."
+    },
+    {
+      id: "marine-e7",
+      prompt: "What is a Marine Corps E-7?",
+      answer:
+        "An E-7 in the United States Marine Corps is a Gunnery Sergeant. His/her insignia is three chevrons over crossed rifles over two rockers."
+    },
+    {
+      id: "marine-e8-msgt",
+      prompt: "What is a Marine Corps E-8 Master Sergeant?",
+      answer:
+        "An E-8 in the United States Marine Corps is a Master Sergeant. His/her insignia is three chevrons over crossed rifles over three rockers."
+    },
+    {
+      id: "marine-e8-first-sgt",
+      prompt: "What is a Marine Corps E-8 First Sergeant?",
+      answer:
+        "An E-8 in the United States Marine Corps is a First Sergeant. His/her insignia is three chevrons over one diamond over three rockers."
+    },
+    {
+      id: "marine-e9-mgy-sgt",
+      prompt: "What is a Marine Corps E-9 Master Gunnery Sergeant?",
+      answer:
+        "An E-9 in the United States Marine Corps is a Master Gunnery Sergeant. His/her insignia is three chevrons over a bursting bomb over four rockers."
+    },
+    {
+      id: "marine-e9-sgt-maj",
+      prompt: "What is a Marine Corps E-9 Sergeant Major?",
+      answer:
+        "An E-9 in the United States Marine Corps is a Sergeant Major. His/her insignia is three chevrons over one star over four rockers."
+    },
+    {
+      id: "marine-e9-smmc",
+      prompt: "What is the Sergeant Major of the Marine Corps?",
+      answer:
+        "The Sergeant Major of the United States Marine Corps is an E-9. His/her insignia is three chevrons over the Marine Corps emblem centered between two, five-pointed stars over four rockers."
     }
   ],
 
